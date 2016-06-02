@@ -13,7 +13,7 @@ namespace UnitySampleAssets._2D
 
         private Transform groundCheck; // A position marking where to check if the player is grounded.
         private float groundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-        private bool grounded = false; // Whether or not the player is grounded.
+        private bool grounded = true; // Whether or not the player is grounded.
 
         private Animator anim; // Reference to the player's animator component.
 
@@ -29,7 +29,7 @@ namespace UnitySampleAssets._2D
         private void FixedUpdate()
         {
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
+         //   grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
             anim.SetBool("Ground", grounded);
 
             // Set the vertical animation
@@ -58,9 +58,12 @@ namespace UnitySampleAssets._2D
                     // ... flip the player.
                     Flip();
             }
+
+            Debug.Log(grounded);
             // If the player should jump...
-            if (grounded && jump && anim.GetBool("Ground"))
+            if (grounded && jump/* && anim.GetBool("Ground")*/)
             {
+                Debug.Log("JUMPIIIING");
                 // Add a vertical force to the player.
                 grounded = false;
                 anim.SetBool("Ground", false);
@@ -79,6 +82,15 @@ namespace UnitySampleAssets._2D
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+        }
+
+        private void OnCollisionEnter2D(Collision2D colInfo)
+        {
+            if (colInfo.collider.tag == "Platform")
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                grounded = true;
+            }
         }
     }
 }
