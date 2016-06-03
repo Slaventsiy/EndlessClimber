@@ -6,7 +6,7 @@ public class PlatformGenerator : MonoBehaviour
     public Transform PlatformPrefab;
 
     private Camera camera;
-    private int horizontalIndicator = 1;
+    private int horizontalIndicator = -1;
     private float lastPlatformY = 0;
 
     void Awake()
@@ -21,10 +21,10 @@ public class PlatformGenerator : MonoBehaviour
 	
 	void Update()
     {
-        if (lastPlatformY + camera.orthographicSize < camera.transform.position.y + camera.orthographicSize)
+        if (lastPlatformY < camera.transform.position.y + camera.orthographicSize)
         {
-            float yPos = camera.transform.position.y + camera.orthographicSize + 5;
-            Instantiate(PlatformPrefab, new Vector3(5 * horizontalIndicator, yPos), camera.transform.rotation);
+            float yPos = lastPlatformY + camera.orthographicSize + 0;
+            Instantiate(PlatformPrefab, new Vector3(7 * horizontalIndicator, yPos), camera.transform.rotation);
 
             horizontalIndicator *= -1;
             lastPlatformY = yPos;

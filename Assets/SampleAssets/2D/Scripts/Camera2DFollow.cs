@@ -36,17 +36,17 @@ namespace UnitySampleAssets._2D
 
             if (updateLookAheadTarget)
             {
-                lookAheadPos = lookAheadFactor*Vector3.right*Mathf.Sign(xMoveDelta);
+                lookAheadPos = lookAheadFactor * Vector3.right * Mathf.Sign(xMoveDelta);
             }
             else
             {
-                lookAheadPos = Vector3.MoveTowards(lookAheadPos, Vector3.zero, Time.deltaTime*lookAheadReturnSpeed);
+                lookAheadPos = Vector3.MoveTowards(lookAheadPos, Vector3.zero, Time.deltaTime * lookAheadReturnSpeed);
             }
 
             Vector3 aheadTargetPos = target.position + lookAheadPos + Vector3.forward*offsetZ;
             Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, damping);
 
-            transform.position = newPos;
+            transform.position = new Vector3(0, newPos.y, newPos.z);
 
             lastTargetPosition = target.position;
         }
