@@ -6,6 +6,8 @@ public class ArrowMove : MonoBehaviour
 {
     public float speed = 100;
 
+    private int maxAngle = 60;
+
     void Start()
     {
 
@@ -13,6 +15,6 @@ public class ArrowMove : MonoBehaviour
     
     void Update()
     {
-        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.PingPong(Time.time * speed, 90)));        
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.PingPong(Time.time * speed, maxAngle)));        
     }
 }

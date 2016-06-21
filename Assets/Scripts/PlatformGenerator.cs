@@ -8,6 +8,8 @@ public class PlatformGenerator : MonoBehaviour
     private Camera camera;
     private int horizontalIndicator = -1;
     private float lastPlatformY = 0;
+    private float coefficient = 4;
+    private float wallDistance = 7;
 
     void Awake()
     {
@@ -23,8 +25,9 @@ public class PlatformGenerator : MonoBehaviour
     {
         if (lastPlatformY < camera.transform.position.y + camera.orthographicSize)
         {
-            float yPos = lastPlatformY + camera.orthographicSize + 0;
-            Instantiate(PlatformPrefab, new Vector3(7 * horizontalIndicator, yPos), camera.transform.rotation);
+            float randValue = coefficient * Random.value;
+            float yPos = lastPlatformY + camera.orthographicSize - coefficient / 2 + randValue;
+            Instantiate(PlatformPrefab, new Vector3(wallDistance * horizontalIndicator, yPos), camera.transform.rotation);
 
             horizontalIndicator *= -1;
             lastPlatformY = yPos;

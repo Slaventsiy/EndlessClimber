@@ -6,8 +6,6 @@ namespace UnitySampleAssets._2D
     {
         private bool facingRight = true; // For determining which way the player is currently facing.
 
-        public float maxSpeed = 10f; // The fastest the player can travel in the x axis.
-        public float jumpForce = 400f; // Amount of force added when the player jumps.	
         public float speed = 70f;
         public LayerMask whatIsGround; // A mask determining what is ground to the character
 

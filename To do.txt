@@ -1,0 +1,33 @@
+MVP1:
+
+DONE	Random platform positions
+		Walls: random wall positions
+		Crumbling platforms
+		Lava
+		Player death
+		Score
+		Game restart
+		Menu
+		Graphics: animations, sprites, GUI, effects
+		Sounds
+		Story
+
+Issues:
+
+
+MVP2:
+Achievements
+Optimal aiming
+Different characters
+Abilities
+Bonuses
+Enemies?
+Different platforms
+New environments?
+Better graphics?
+Upgrades
+Dailies?
+
+
+Extras:
+Rotating screen
