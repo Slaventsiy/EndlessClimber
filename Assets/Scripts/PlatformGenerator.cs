@@ -3,12 +3,12 @@ using System.Collections;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    public Transform PlatformPrefab;
+    public GameObject PlatformPrefab;
 
     private Camera camera;
     private int horizontalIndicator = -1;
     private float lastPlatformY = 0;
-    private float coefficient = 4;
+    private float coefficient = 3;
     private float wallDistance = 7;
 
     void Awake()
@@ -27,7 +27,10 @@ public class PlatformGenerator : MonoBehaviour
         {
             float randValue = coefficient * Random.value;
             float yPos = lastPlatformY + camera.orthographicSize - coefficient / 2 + randValue;
-            Instantiate(PlatformPrefab, new Vector3(wallDistance * horizontalIndicator, yPos), camera.transform.rotation);
+            
+            GameObject platform = (GameObject)Instantiate(PlatformPrefab, new Vector3(wallDistance * horizontalIndicator, yPos), camera.transform.rotation);
+
+            platform.transform.SetParent(GameObject.FindGameObjectWithTag("PlatformContainer").GetComponent<Transform>());
 
             horizontalIndicator *= -1;
             lastPlatformY = yPos;

@@ -5,7 +5,6 @@ namespace UnitySampleAssets._2D
 
     public class Camera2DFollow : MonoBehaviour
     {
-
         public Transform target;
         public float damping = 1;
         public float lookAheadFactor = 3;
@@ -28,27 +27,33 @@ namespace UnitySampleAssets._2D
         // Update is called once per frame
         private void Update()
         {
-
-            // only update lookahead pos if accelerating or changed direction
-            float xMoveDelta = (target.position - lastTargetPosition).x;
-
-            bool updateLookAheadTarget = Mathf.Abs(xMoveDelta) > lookAheadMoveThreshold;
-
-            if (updateLookAheadTarget)
+            if (target != null)
             {
-                lookAheadPos = lookAheadFactor * Vector3.right * Mathf.Sign(xMoveDelta);
+                // only update lookahead pos if accelerating or changed direction
+                float xMoveDelta = (target.position - lastTargetPosition).x;
+
+                bool updateLookAheadTarget = Mathf.Abs(xMoveDelta) > lookAheadMoveThreshold;
+
+                if (updateLookAheadTarget)
+                {
+                    lookAheadPos = lookAheadFactor * Vector3.right * Mathf.Sign(xMoveDelta);
+                }
+                else
+                {
+                    lookAheadPos = Vector3.MoveTowards(lookAheadPos, Vector3.zero, Time.deltaTime * lookAheadReturnSpeed);
+                }
+
+                Vector3 aheadTargetPos = target.position + lookAheadPos + Vector3.forward * offsetZ;
+                Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, damping);
+
+                transform.position = new Vector3(0, newPos.y, newPos.z);
+
+                lastTargetPosition = target.position;
             }
             else
             {
-                lookAheadPos = Vector3.MoveTowards(lookAheadPos, Vector3.zero, Time.deltaTime * lookAheadReturnSpeed);
+                target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             }
-
-            Vector3 aheadTargetPos = target.position + lookAheadPos + Vector3.forward*offsetZ;
-            Vector3 newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, damping);
-
-            transform.position = new Vector3(0, newPos.y, newPos.z);
-
-            lastTargetPosition = target.position;
         }
     }
 }

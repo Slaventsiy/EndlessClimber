@@ -122,7 +122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 415330, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
@@ -139,7 +139,7 @@ GameObject:
   - 114: {fileID: 530171575}
   m_Layer: 0
   m_Name: _GameMaster
-  m_TagString: Untagged
+  m_TagString: GM
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cd4b80dc82cae46964074b35df5129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlatformPrefab: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
+  PlatformPrefab: {fileID: 131312, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
 --- !u!4 &530171574
 Transform:
   m_ObjectHideFlags: 0
@@ -180,7 +180,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 415330, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
-  spawnPoint: {fileID: 435648, guid: 693502fdab745ff458e9bd8756faa776, type: 2}
+  spawnPoint: {fileID: 497256, guid: 693502fdab745ff458e9bd8756faa776, type: 2}
+--- !u!1 &770163396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 770163397}
+  m_Layer: 0
+  m_Name: PlatformContainer
+  m_TagString: PlatformContainer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770163397
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 770163396}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.56014013, y: 4.9222064, z: -0.022592545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1598834692}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!4 &841021201 stripped
 Transform:
   m_PrefabParentObject: {fileID: 415330, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
@@ -190,19 +218,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 770163397}
     m_Modifications:
     - target: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 6.43986
       objectReference: {fileID: 0}
     - target: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.27
+      value: 0.34779358
       objectReference: {fileID: 0}
     - target: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.022592545
       objectReference: {fileID: 0}
     - target: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
       propertyPath: m_LocalRotation.x
@@ -222,7 +250,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
       propertyPath: m_LocalScale.y
@@ -316,6 +344,10 @@ BoxCollider2D:
 GameObject:
   m_PrefabParentObject: {fileID: 131312, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
   m_PrefabInternal: {fileID: 1212054899}
+--- !u!4 &1598834692 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 487278, guid: 7b83b5cd1f6f1c947943edcc59c91197, type: 2}
+  m_PrefabInternal: {fileID: 1212054899}
 --- !u!114 &1598834693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +409,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 0.014705896, b: 0.3612576, a: 0.019607844}
+  m_BackGroundColor: {r: 0.014705896, g: 1, b: 0.836917, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0

@@ -9,6 +9,8 @@ TagManager:
   - Smelly
   - Fire
   - Platform
+  - GM
+  - PlatformContainer
   layers:
   - Default
   - TransparentFX
