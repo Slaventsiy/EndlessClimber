@@ -64,16 +64,13 @@ namespace UnitySampleAssets._2D
 
         private void OnCollisionEnter2D(Collision2D colInfo)
         {
-            if (colInfo.collider.tag == "Platform")
+            if (colInfo.collider.tag == "Platform" || colInfo.collider.tag == "PlatformOriginal")
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 grounded = true;
                 Flip();
-
-                
+                GameMaster.UpdateScore();             
             }
-        }
-
-        
+        }        
     }
 }

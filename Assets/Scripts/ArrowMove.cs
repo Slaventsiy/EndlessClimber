@@ -16,8 +16,5 @@ public class ArrowMove : MonoBehaviour
     void Update()
     {
         transform.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.PingPong(Time.time * speed, maxAngle)));
-
-        Debug.Log("MOOOVE");
-                
     }
 }

@@ -4,26 +4,46 @@ using System.Collections;
 public class PlatformGenerator : MonoBehaviour
 {
     public GameObject PlatformPrefab;
+    public static PlatformGenerator pg;
 
     private Camera camera;
-    private int horizontalIndicator = -1;
-    private float lastPlatformY = 0;
+
+    private static int horizontalIndicator = -1;
+    private static float lastPlatformY = 0;
+
     private float coefficient = 3;
     private float wallDistance = 7;
+
+    private const float start_lastPlatformY = 0;
+    private const int start_horizontalIndicator = -1;
+
+    private static bool pause = false;
 
     void Awake()
     {
         camera = Camera.main;
     }
-    
+
+    // Use this for initialization
     void Start()
     {
-
+        if (pg == null)
+        {
+            pg = GameObject.FindGameObjectWithTag("GM").GetComponent<PlatformGenerator>();
+        }
     }
-	
-	void Update()
+
+    void Update()
     {
-        if (lastPlatformY < camera.transform.position.y + camera.orthographicSize)
+        if (pause)
+        {
+            if (camera.transform.position.y < 2)
+            {
+                pause = false;
+            }
+        }
+
+        if (!pause && lastPlatformY < camera.transform.position.y + camera.orthographicSize)
         {
             float randValue = coefficient * Random.value;
             float yPos = lastPlatformY + camera.orthographicSize - coefficient / 2 + randValue;
@@ -36,4 +56,12 @@ public class PlatformGenerator : MonoBehaviour
             lastPlatformY = yPos;
         }
     }
+
+    public static void Reset()
+    {
+        pause = true;
+        lastPlatformY = start_lastPlatformY;
+        horizontalIndicator = start_horizontalIndicator;
+    }
+
 }

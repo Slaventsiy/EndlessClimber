@@ -1,11 +1,11 @@
 MVP1:
 
 DONE	Random platform positions
-		Walls: random wall positions
+DONE	Walls: random wall positions
 		Crumbling platforms
 		Lava
-		Player death
-		Score
+DONE	Player death
+DONE	Score
 		Game restart
 		Menu
 		Graphics: animations, sprites, GUI, effects

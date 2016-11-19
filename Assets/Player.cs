@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     {
         if (Math.Abs(transform.position.x) > 7.5)
         {
-            GameMaster.KillPlayer(this);
+            GameMaster.EndGame(this);
         }
     }
 }

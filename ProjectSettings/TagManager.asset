@@ -11,6 +11,8 @@ TagManager:
   - Platform
   - GM
   - PlatformContainer
+  - PlatformOriginal
+  - ScoreText
   layers:
   - Default
   - TransparentFX
