@@ -11,7 +11,12 @@ DONE	Score
 		Graphics: animations, sprites, GUI, effects
 		Sounds
 		Story
-
+		
+Extra:
+		Animated score update
+		Camera shake
+		Changing arrow color while pointing towards the center of the next platform
+		Crumbling time varies depending on the quality of the landing
 Issues:
 
 
