@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnitySampleAssets._2D;
 
 public class GameMaster : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameMaster : MonoBehaviour
     public Transform spawnPoint;
 
     public Text scoreText;
+    public Text finalScoreText;
+    public GameObject GameOverUI;
 
     private static int playerScore = 0;
 
@@ -35,12 +38,22 @@ public class GameMaster : MonoBehaviour
 
     public static void EndGame(Player player)
     {
+        // Load the game over layout
+        gm.GameOverUI.SetActive(true);
+        gm.finalScoreText.text = "Score: " + playerScore;
+
+        //Camera.current.GetComponent<Camera2DFollow>().enabled = false;
+
         Destroy(player.gameObject);
-        DestroyPlatforms();
-        gm.ResetScore();
 
+        // Reset game properties
         PlatformGenerator.Reset();
+        gm.ResetScore();
+    }
 
+    public static void ResetGame()
+    {
+        DestroyPlatforms();
         gm.RespawnPlayer();
     }
 

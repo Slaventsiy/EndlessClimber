@@ -6,7 +6,7 @@ DONE	Walls: random wall positions
 		Lava
 DONE	Player death
 DONE	Score
-		Game restart
+DONE	Game restart
 		Menu
 		Graphics: animations, sprites, GUI, effects
 		Sounds
