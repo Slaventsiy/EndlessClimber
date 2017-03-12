@@ -9,6 +9,8 @@ namespace UnitySampleAssets._2D
         public float speed = 70f;
         public LayerMask whatIsGround; // A mask determining what is ground to the character
 
+        public GameObject impactEffect;
+
         private Transform groundCheck; // A position marking where to check if the player is grounded.
         private float groundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool grounded = true; // Whether or not the player is grounded.
@@ -62,6 +64,13 @@ namespace UnitySampleAssets._2D
             transform.localScale = scale;
         }
 
+        private void CreateImpactEffect()
+        {
+            GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, Quaternion.Euler(0, 90 * transform.localScale.x, 0));
+
+            Debug.Log(effect.transform.rotation.y);
+        }
+
         private void OnCollisionEnter2D(Collision2D colInfo)
         {
             if (colInfo.collider.tag == "Platform" || colInfo.collider.tag == "PlatformOriginal")
@@ -69,6 +78,7 @@ namespace UnitySampleAssets._2D
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 grounded = true;
                 Flip();
+                CreateImpactEffect();
                 GameMaster.UpdateScore();             
             }
         }        

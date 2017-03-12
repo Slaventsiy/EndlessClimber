@@ -122,7 +122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 415330, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 21235386, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
       propertyPath: m_SortingLayerID
@@ -132,6 +132,10 @@ Prefab:
       propertyPath: m_SortingLayerID
       value: -354108773
       objectReference: {fileID: 0}
+    - target: {fileID: 11441816, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
+      propertyPath: impactEffect
+      value: 
+      objectReference: {fileID: 112878, guid: 78d4cef017b710e4abe6515424dca275, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ba98693fd5db6c44b9a6a54b576b196, type: 2}
   m_IsPrefabParent: 0
@@ -996,7 +1000,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.014705896, g: 1, b: 0.836917, a: 0.019607844}
+  m_BackGroundColor: {r: 0, g: 0.6544118, b: 0.54609543, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
