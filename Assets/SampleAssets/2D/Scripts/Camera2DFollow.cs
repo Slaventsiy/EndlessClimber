@@ -52,6 +52,7 @@ namespace UnitySampleAssets._2D
             }
             else
             {
+                // #abug #fixlater #cantfindplayer #dontdestroyplayer
                 target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             }
         }

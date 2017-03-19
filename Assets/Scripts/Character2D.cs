@@ -67,8 +67,6 @@ namespace UnitySampleAssets._2D
         private void CreateImpactEffect()
         {
             GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, Quaternion.Euler(0, 90 * transform.localScale.x, 0));
-
-            Debug.Log(effect.transform.rotation.y);
         }
 
         private void OnCollisionEnter2D(Collision2D colInfo)

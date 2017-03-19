@@ -7,11 +7,15 @@ namespace UnitySampleAssets._2D
     public class UserControl : MonoBehaviour
     {
         private Character2D character;
+        private Hook hook;
         private bool jump = false;
+        private Transform arrow;
 
         private void Awake()
         {
             character = GetComponent<Character2D>();
+            arrow = transform.Find("Arrow");
+            hook = arrow.GetComponent<Hook>();
         }
 
         private void Update()
@@ -28,8 +32,10 @@ namespace UnitySampleAssets._2D
             // Read the inputs.
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             // Pass all parameters to the character control script.
-            character.Move(h, jump);
-            jump = false;
+            if (jump)
+                hook.Shoot(arrow.localRotation);
+            // character.Move(h, jump);
+                jump = false;
         }
     }
 }
