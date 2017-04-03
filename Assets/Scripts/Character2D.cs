@@ -6,7 +6,7 @@ namespace UnitySampleAssets._2D
     {
         private bool facingRight = true; // For determining which way the player is currently facing.
 
-        public float speed = 70f;
+        public float speed = 0.1f;
         public LayerMask whatIsGround; // A mask determining what is ground to the character
 
         public GameObject impactEffect;
@@ -14,43 +14,57 @@ namespace UnitySampleAssets._2D
         private Transform groundCheck; // A position marking where to check if the player is grounded.
         private float groundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool grounded = true; // Whether or not the player is grounded.
+        private bool isHooked = false; // Is character pulling himself.
         private Animator anim; // Reference to the player's animator component.
+        private Vector3 pullDirection;
+        private Hook hook;
 
         private void Awake()
         {
             // Setting up references.
             groundCheck = transform.Find("GroundCheck");
             anim = GetComponent<Animator>();
+            GameObject arrow = GameObject.Find("Arrow");
+            hook = arrow.GetComponent<Hook>();
         }
 
         private void FixedUpdate()
         {
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-         //   grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
+            //   grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
             anim.SetBool("Ground", grounded);
 
             // Set the vertical animation
             anim.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
+
+            if (isHooked)
+            {
+                Move();
+            }
         }
 
-        public void Move(float move, bool jump)
+        public void Move()
         {
-            Quaternion rotation = transform.Find("Arrow").transform.rotation;
-
-            // If the player should jump...
-            if (grounded && jump/* && anim.GetBool("Ground")*/)
+            anim.SetBool("Ground", false);
+            if (!facingRight)
             {
-                // Add a vertical force to the player.
-                grounded = false;
-                anim.SetBool("Ground", false);
-
-                Vector3 dir = Quaternion.AngleAxis(rotation.eulerAngles.z, Vector3.forward) * Vector3.right;
-                if (!facingRight)
-                {
-                    dir.x *= -1;
-                }
-                GetComponent<Rigidbody2D>().velocity = new Vector2(dir.x, dir.y) * speed;
+                pullDirection.x *= -1;
             }
+            transform.Translate(pullDirection * speed, Space.World);
+
+            if (Mathf.Abs(transform.position.x) >= 7)
+            {
+                transform.position.Set(7, transform.position.y, transform.position.z);
+                isHooked = false;
+                OnWallReach();
+                hook.Aim();
+            }
+        }
+
+        public void HookUp(Vector3 direction)
+        {
+            pullDirection = direction;
+            isHooked = true;
         }
 
         private void Flip()
@@ -69,16 +83,12 @@ namespace UnitySampleAssets._2D
             GameObject effect = (GameObject)Instantiate(impactEffect, transform.position, Quaternion.Euler(0, 90 * transform.localScale.x, 0));
         }
 
-        private void OnCollisionEnter2D(Collision2D colInfo)
+        private void OnWallReach()
         {
-            if (colInfo.collider.tag == "Platform" || colInfo.collider.tag == "PlatformOriginal")
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-                grounded = true;
-                Flip();
-                CreateImpactEffect();
-                GameMaster.UpdateScore();             
-            }
-        }        
+            grounded = true;
+            Flip();
+            CreateImpactEffect();
+            GameMaster.UpdateScore();
+        }
     }
 }
