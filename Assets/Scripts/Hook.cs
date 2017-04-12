@@ -52,7 +52,16 @@ namespace UnitySampleAssets._2D
 
         public void Shoot(Quaternion rotation)
         {
-            shotDirection = Quaternion.AngleAxis(rotation.eulerAngles.z, Vector3.forward) * Vector3.right;
+            float arrowRotation = rotation.eulerAngles.z;
+            if (!facingRight)
+            {
+                arrowRotation += 60;
+            }
+            shotDirection = Quaternion.AngleAxis(arrowRotation, Vector3.forward) * Vector3.right;
+            if (!facingRight)
+            {
+                shotDirection.x *= -1;
+            }
             isShot = true;
             isAiming = false;
             this.rotation = rotation;
@@ -65,7 +74,12 @@ namespace UnitySampleAssets._2D
 
         private void Rotate()
         {
-            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, Mathf.PingPong(Time.time * rotationSpeed, maxAngle)));
+            float rotation = Mathf.PingPong(Time.time * rotationSpeed, maxAngle);
+            if (!facingRight)
+            {
+                rotation += 300;
+            }
+            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, rotation));
         }
 
         public void Aim()
@@ -78,7 +92,7 @@ namespace UnitySampleAssets._2D
         {
             // Switch the way the player is labelled as facing.
             facingRight = !facingRight;
-
+            
             // Multiply the player's x local scale by -1.
             Vector3 scale = transform.localScale;
             scale.x *= -1;

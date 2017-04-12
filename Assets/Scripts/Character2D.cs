@@ -46,13 +46,15 @@ namespace UnitySampleAssets._2D
         public void Move()
         {
             anim.SetBool("Ground", false);
-            if (!facingRight)
-            {
-                pullDirection.x *= -1;
-            }
-            transform.Translate(pullDirection * speed, Space.World);
 
-            if (Mathf.Abs(transform.position.x) >= 7)
+            Vector3 distanceToMove = pullDirection * speed;
+            Vector3 transformedDistanceToMove = transform.TransformDirection(distanceToMove);
+
+            if (Mathf.Abs(transform.position.x + distanceToMove.x) <= 7)
+            {
+                transform.Translate(distanceToMove, Space.World);
+            }
+            else
             {
                 transform.position.Set(7, transform.position.y, transform.position.z);
                 isHooked = false;
@@ -64,6 +66,7 @@ namespace UnitySampleAssets._2D
         public void HookUp(Vector3 direction)
         {
             pullDirection = direction;
+            
             isHooked = true;
         }
 
