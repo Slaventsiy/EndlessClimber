@@ -47,7 +47,7 @@ public class PlatformGenerator : MonoBehaviour
         {
             float randValue = coefficient * Random.value;
             float yPos = lastPlatformY + camera.orthographicSize - coefficient / 2 + randValue;
-            
+
             GameObject platform = (GameObject)Instantiate(PlatformPrefab, new Vector3(wallDistance * horizontalIndicator, yPos), camera.transform.rotation);
 
             platform.transform.SetParent(GameObject.FindGameObjectWithTag("PlatformContainer").GetComponent<Transform>());

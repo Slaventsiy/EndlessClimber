@@ -48,15 +48,14 @@ namespace UnitySampleAssets._2D
             anim.SetBool("Ground", false);
 
             Vector3 distanceToMove = pullDirection * speed;
-            Vector3 transformedDistanceToMove = transform.TransformDirection(distanceToMove);
 
-            if (Mathf.Abs(transform.position.x + distanceToMove.x) <= 7)
+            if (Mathf.Abs(transform.position.x + distanceToMove.x) < 7)
             {
                 transform.Translate(distanceToMove, Space.World);
             }
             else
             {
-                transform.position.Set(7, transform.position.y, transform.position.z);
+                transform.position = new Vector3(7, transform.position.y, transform.position.z);
                 isHooked = false;
                 OnWallReach();
                 hook.Aim();

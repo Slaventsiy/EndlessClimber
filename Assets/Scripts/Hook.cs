@@ -9,7 +9,7 @@ namespace UnitySampleAssets._2D
     {
 
         private bool isShot = false;
-        private float speed = 0.1f;
+        public float speed = 0.5f;
         public float rotationSpeed = 50;
         private int maxAngle = 60;
         private Quaternion rotation;
@@ -18,13 +18,13 @@ namespace UnitySampleAssets._2D
         public UnityEvent arrowStop;
         private Character2D character;
         private bool isAiming = true;
-        private GameObject playa;
+        private GameObject player;
         private bool facingRight = true;
         
         void Awake()
         {
-            playa = GameObject.Find("Player");
-            character = playa.GetComponent<Character2D>();
+            player = GameObject.Find("Player");
+            character = player.GetComponent<Character2D>();
             // GetComponent<Character2D>();
         }
         // Update is called once per frame
@@ -37,12 +37,6 @@ namespace UnitySampleAssets._2D
             if (isShot)
             {
                 Move();
-
-                if (Mathf.Abs(tip.transform.position.x) >= 7)
-                {
-                    isShot = false;
-                    character.HookUp(shotDirection);
-                }
             }
             if (isAiming)
             {
@@ -53,15 +47,18 @@ namespace UnitySampleAssets._2D
         public void Shoot(Quaternion rotation)
         {
             float arrowRotation = rotation.eulerAngles.z;
+            Vector3 axis = Vector3.forward;
             if (!facingRight)
             {
-                arrowRotation += 60;
+                axis = Vector3.back;
             }
-            shotDirection = Quaternion.AngleAxis(arrowRotation, Vector3.forward) * Vector3.right;
+
+            shotDirection = Quaternion.AngleAxis(arrowRotation, axis) * Vector3.right;
             if (!facingRight)
             {
                 shotDirection.x *= -1;
             }
+
             isShot = true;
             isAiming = false;
             this.rotation = rotation;
@@ -69,7 +66,23 @@ namespace UnitySampleAssets._2D
 
         private void Move()
         {
-            transform.Translate(shotDirection * speed, Space.World);
+            Vector3 distanceToMove = shotDirection * speed;
+         
+            if (Mathf.Abs(tip.transform.position.x + distanceToMove.x) < 7)
+            {
+                transform.Translate(distanceToMove, Space.World);
+            }
+            else
+            {
+                
+                float overShootOnX = Mathf.Abs(tip.transform.position.x + distanceToMove.x) - 7.0f;
+                float ratio = overShootOnX / distanceToMove.x;
+                Vector3 correctedDistanceToMove = distanceToMove * (1 - ratio);
+
+                transform.position += correctedDistanceToMove;
+                isShot = false;
+                character.HookUp(shotDirection);
+            }
         }
 
         private void Rotate()
@@ -84,6 +97,8 @@ namespace UnitySampleAssets._2D
 
         public void Aim()
         {
+            Vector3 arrowSpawnPoint = player.transform.FindChild("ArrowSpawnPoint").transform.position;
+            transform.position = arrowSpawnPoint;
             isAiming = true;
             Flip();
         }
