@@ -46,6 +46,8 @@ namespace UnitySampleAssets._2D
 
         public void Shoot(Quaternion rotation)
         {
+            if (!isAiming) return;
+
             float arrowRotation = rotation.eulerAngles.z;
             Vector3 axis = Vector3.forward;
             if (!facingRight)
@@ -74,14 +76,21 @@ namespace UnitySampleAssets._2D
             }
             else
             {
-                
                 float overShootOnX = Mathf.Abs(tip.transform.position.x + distanceToMove.x) - 7.0f;
-                float ratio = overShootOnX / distanceToMove.x;
+                float ratio = Mathf.Abs(overShootOnX / distanceToMove.x);
+
                 Vector3 correctedDistanceToMove = distanceToMove * (1 - ratio);
 
                 transform.position += correctedDistanceToMove;
                 isShot = false;
+
                 character.HookUp(shotDirection);
+
+                Collider2D[] overlappingPlatforms = Physics2D.OverlapCircleAll(new Vector2(tip.transform.position.x, tip.transform.position.y), 0.1f, 1 << LayerMask.NameToLayer("Platforms"));
+
+                if (overlappingPlatforms.Length == 0) {
+                    GameMaster.EndGame();
+                }
             }
         }
 

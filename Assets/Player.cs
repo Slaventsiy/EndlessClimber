@@ -14,9 +14,5 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Math.Abs(transform.position.x) > 7.5)
-        {
-            GameMaster.EndGame(this);
-        }
     }
 }

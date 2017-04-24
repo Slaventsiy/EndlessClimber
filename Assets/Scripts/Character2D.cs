@@ -55,7 +55,7 @@ namespace UnitySampleAssets._2D
             }
             else
             {
-                transform.position = new Vector3(7, transform.position.y, transform.position.z);
+                transform.position = new Vector3(7 * (facingRight ? 1 : -1), transform.position.y, transform.position.z);
                 isHooked = false;
                 OnWallReach();
                 hook.Aim();

@@ -11,7 +11,7 @@ public class PlatformGenerator : MonoBehaviour
     private static int horizontalIndicator = -1;
     private static float lastPlatformY = 0;
 
-    private float coefficient = 3;
+    private float coefficient = 1;
     private float wallDistance = 7;
 
     private const float start_lastPlatformY = 0;

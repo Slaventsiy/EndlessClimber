@@ -36,7 +36,7 @@ public class GameMaster : MonoBehaviour
         gm.scoreText.text = "Score: " + playerScore;
     }
 
-    public static void EndGame(Player player)
+    public static void EndGame()
     {
         // Load the game over layout
         gm.GameOverUI.SetActive(true);
@@ -44,7 +44,7 @@ public class GameMaster : MonoBehaviour
 
         //Camera.current.GetComponent<Camera2DFollow>().enabled = false;
 
-        Destroy(player.gameObject);
+        // Destroy(player.gameObject);
 
         // Reset game properties
         PlatformGenerator.Reset();
