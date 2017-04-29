@@ -20,7 +20,8 @@ namespace UnitySampleAssets._2D
         private bool isAiming = true;
         private GameObject player;
         private bool facingRight = true;
-        
+        private float lastResetArrowTime = 0;
+
         void Awake()
         {
             player = GameObject.Find("Player");
@@ -101,18 +102,20 @@ namespace UnitySampleAssets._2D
 
         private void Rotate()
         {
-            float rotation = Mathf.PingPong(Time.time * rotationSpeed, maxAngle);
+            float rotation = Mathf.PingPong((Time.time - lastResetArrowTime) * rotationSpeed, maxAngle);
             if (!facingRight)
             {
-                rotation += 300;
+                rotation *= -1;
             }
-            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, rotation));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotation));
         }
 
         public void Aim()
         {
             Vector3 arrowSpawnPoint = player.transform.FindChild("ArrowSpawnPoint").transform.position;
             transform.position = arrowSpawnPoint;
+            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            lastResetArrowTime = Time.time;
             isAiming = true;
             Flip();
         }

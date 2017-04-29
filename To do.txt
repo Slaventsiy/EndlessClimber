@@ -7,11 +7,13 @@ DONE	Walls: random wall positions
 DONE	Player death
 DONE	Score
 DONE	Game restart
-		Menu
+		Menu: settings, mute, high scores
 		Graphics: animations, sprites, GUI, effects
 		Sounds
 		Story
-		
+		Kill player
+                Rope animation
+                Player can shoot the arrow horizontally once while falling after missing the platform
 Extra:
 		Animated score update
 		Camera shake
