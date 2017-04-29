@@ -88,8 +88,13 @@ namespace UnitySampleAssets._2D
 
                 Collider2D[] overlappingPlatforms = Physics2D.OverlapCircleAll(new Vector2(tip.transform.position.x, tip.transform.position.y), 0.1f, 1 << LayerMask.NameToLayer("Platforms"));
 
-                if (overlappingPlatforms.Length == 0) {
-                    GameMaster.EndGame();
+                if (overlappingPlatforms.Length == 0)
+                {
+                    GameMaster.ActivateGameOverScreen();
+                }
+                else
+                {
+                    GameMaster.UpdateScore();
                 }
             }
         }

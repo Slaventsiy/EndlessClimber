@@ -90,7 +90,6 @@ namespace UnitySampleAssets._2D
             grounded = true;
             Flip();
             CreateImpactEffect();
-            GameMaster.UpdateScore();
         }
     }
 }

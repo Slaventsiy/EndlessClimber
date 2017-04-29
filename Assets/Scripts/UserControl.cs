@@ -20,7 +20,7 @@ namespace UnitySampleAssets._2D
 
         private void Update()
         {
-            if (!jump)
+            if (!jump && !GameMaster.gm.GameOverUI.activeInHierarchy)
             {
                 // Read the jump input in Update so button presses aren't missed.
                 jump = CrossPlatformInputManager.GetButtonDown("Jump");
@@ -33,8 +33,11 @@ namespace UnitySampleAssets._2D
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             // Pass all parameters to the character control script.
             if (jump)
+            {
                 hook.Shoot(arrow.transform.localRotation);
                 jump = false;
+            }
+
         }
     }
 }

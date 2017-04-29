@@ -14,8 +14,8 @@ public class PlatformGenerator : MonoBehaviour
     private float coefficient = 1;
     private float wallDistance = 7;
 
-    private const float start_lastPlatformY = 0;
-    private const int start_horizontalIndicator = -1;
+    private const float initialLastPlatformY = 0;
+    private const int initialHorizontalIndicator = -1;
 
     private static bool pause = false;
 
@@ -60,8 +60,8 @@ public class PlatformGenerator : MonoBehaviour
     public static void Reset()
     {
         pause = true;
-        lastPlatformY = start_lastPlatformY;
-        horizontalIndicator = start_horizontalIndicator;
+        lastPlatformY = initialLastPlatformY;
+        horizontalIndicator = initialHorizontalIndicator;
     }
 
 }

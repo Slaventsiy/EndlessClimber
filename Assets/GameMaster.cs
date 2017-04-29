@@ -15,8 +15,8 @@ public class GameMaster : MonoBehaviour
 
     private static int playerScore = 0;
 
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+    void Start()
     {
 	    if (gm == null)
         {
@@ -36,28 +36,20 @@ public class GameMaster : MonoBehaviour
         gm.scoreText.text = "Score: " + playerScore;
     }
 
-    public static void EndGame()
+    public static void ActivateGameOverScreen()
     {
         // Load the game over layout
         gm.GameOverUI.SetActive(true);
-        gm.finalScoreText.text = "Score: " + playerScore;
+        gm.finalScoreText.text = "Score: " + playerScore;       
+    }
 
-        //Camera.current.GetComponent<Camera2DFollow>().enabled = false;
-
-        // Destroy(player.gameObject);
-
-        // Reset game properties
+    public static void Reset()
+    {
         PlatformGenerator.Reset();
         gm.ResetScore();
     }
 
-    public static void ResetGame()
-    {
-        DestroyPlatforms();
-        gm.RespawnPlayer();
-    }
-
-    private void ResetScore()
+    public void ResetScore()
     {
         scoreText.text = "Score: 0";
         playerScore = 0;
@@ -67,15 +59,5 @@ public class GameMaster : MonoBehaviour
     {
         Destroy(player.gameObject);
         gm.RespawnPlayer();
-    }
-
-    public static void DestroyPlatforms()
-    {
-        var clones = GameObject.FindGameObjectsWithTag("Platform");
-        foreach (var clone in clones)
-        {
-            Destroy(clone);
-            Debug.Log("Destroyed");
-        }
     }
 }
