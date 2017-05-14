@@ -55,7 +55,12 @@ namespace UnitySampleAssets._2D
             }
             else
             {
-                transform.position = new Vector3(7 * (facingRight ? 1 : -1), transform.position.y, transform.position.z);
+                float overShootOnX = Mathf.Abs(transform.position.x + distanceToMove.x) - 7.0f;
+                float ratio = Mathf.Abs(overShootOnX / distanceToMove.x);
+
+                Vector3 correctedDistanceToMove = distanceToMove * (1 - ratio);
+
+                transform.position += correctedDistanceToMove;
                 isHooked = false;
                 OnWallReach();
                 hook.Aim();

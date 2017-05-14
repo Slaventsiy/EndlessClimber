@@ -14,19 +14,20 @@ namespace UnitySampleAssets._2D
         private int maxAngle = 60;
         private Quaternion rotation;
         public GameObject tip;
+        public GameObject nock;
         private Vector3 shotDirection;
-        public UnityEvent arrowStop;
         private Character2D character;
         private bool isAiming = true;
         private GameObject player;
         private bool facingRight = true;
         private float lastResetArrowTime = 0;
+        public LineRenderer rope;
+        public GameObject arrowSpawnPoint;
 
         void Awake()
         {
             player = GameObject.Find("Player");
             character = player.GetComponent<Character2D>();
-            // GetComponent<Character2D>();
         }
         // Update is called once per frame
         void FixedUpdate()
@@ -43,10 +44,16 @@ namespace UnitySampleAssets._2D
             {
                 Rotate();
             }
+            else
+            {
+                rope.enabled = true;
+                SetRopePosition();
+            }
         }
 
         public void Shoot(Quaternion rotation)
         {
+            SetRopePosition();
             if (!isAiming) return;
 
             float arrowRotation = rotation.eulerAngles.z;
@@ -112,6 +119,7 @@ namespace UnitySampleAssets._2D
 
         public void Aim()
         {
+            rope.enabled = false;
             Vector3 arrowSpawnPoint = player.transform.FindChild("ArrowSpawnPoint").transform.position;
             transform.position = arrowSpawnPoint;
             transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
@@ -129,6 +137,22 @@ namespace UnitySampleAssets._2D
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+        }
+
+        private void SetRopePosition()
+        {
+            Vector3 position1 = arrowSpawnPoint.transform.position;
+            Vector3 position2 = nock.transform.position;
+            float distance = Vector3.Distance(position1, position2);
+            if (distance < Vector3.Distance(tip.transform.position, nock.transform.position))
+            {
+                rope.enabled = false;
+            }
+            else
+            {
+                rope.SetPosition(0, position1);
+                rope.SetPosition(1, position2);
+            }
         }
     }
 }
