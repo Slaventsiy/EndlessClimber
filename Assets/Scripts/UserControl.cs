@@ -9,6 +9,7 @@ namespace UnitySampleAssets._2D
         private Character2D character;
         private Hook hook;
         private bool jump = false;
+        private MovingLava lava;
         private GameObject arrow;
 
         private void Awake()
@@ -16,6 +17,7 @@ namespace UnitySampleAssets._2D
             character = GetComponent<Character2D>();
             arrow = GameObject.Find("Arrow");
             hook = arrow.GetComponent<Hook>();
+            lava = GameObject.Find("Lava").GetComponent<MovingLava>();
         }
 
         private void Update()
@@ -35,6 +37,7 @@ namespace UnitySampleAssets._2D
             if (jump)
             {
                 hook.Shoot(arrow.transform.localRotation);
+                lava.StartLava();
                 jump = false;
             }
 

@@ -11,10 +11,12 @@ DONE	Game restart
 		Graphics: animations, sprites, GUI, effects
 		Sounds
 		Story
-		Kill player
-                Rope animation
-                Player can shoot the arrow horizontally once while falling after missing the platform
+DONE	Kill player
+		Death animation
+DONE	Rope animation
+   
 Extra:
+		Player can shoot the arrow horizontally once while falling after missing the platform
 		Animated score update
 		Camera shake
 		Changing arrow color while pointing towards the center of the next platform
